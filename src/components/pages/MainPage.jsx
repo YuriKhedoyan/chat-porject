@@ -6,28 +6,21 @@ import AddIcon from '@mui/icons-material/Add';
 import SendIcon from '@mui/icons-material/Send';
 import { TextField } from '@mui/material';
 import { Button } from '@mui/material';
+import { useLocation } from 'react-router-dom';
 import '../../Assets/style.sass'
 
 const MainPage = () => {
-  const [usersNameArray] = useState([]);
   const [message] = useState(localStorage.getItem('message')?.split(',') ?? []);
   const [inputText, setInputText] = useState('');
-  const [userName, setUserName] = useState('');
-  const [userLastName, setUserLastName] = useState('');
-  const [id, setId] = useState(0);
-  const [open, setOpen] = useState('none');
+  const { state } = useLocation();
+  console.log(useLocation())
+  const [id] = useState(0);
 
   const sendMessage = e => {
     e.preventDefault();
     message.push(inputText);
     localStorage.setItem(`chat${id}`, {message});
     setInputText('');
-  }
-
-  const addNewChat = () => {
-    setId(id + 1);
-    usersNameArray.push([userName, ' ', userLastName].join(''))
-    localStorage.setItem(`chat${id}`, message, usersNameArray[id]);
   }
 
   // localStorage.clear()
@@ -37,24 +30,18 @@ const MainPage = () => {
         <Grid xs={2}>
           <div id='firstPart'>
             <span className='addNewUserSection'>
-              <Fab color="primary" aria-label="add" onClick={e => setOpen('block')}> <AddIcon /> </Fab>
+              <Fab color="primary" aria-label="add"> <AddIcon /> </Fab>
               <TextField id="standard-basic" label="Search..." variant="standard" />
-              <div className='addNewUser' style={{display: `${open}`}}>
-                <TextField id="standard-basic" label="Search..." variant="standard" className='textField' value={userName} onChange={e => setUserName(e.target.value)}/>
-                <TextField id="standard-basic" label="Search..." variant="standard" className='textField' value={userLastName} onChange={e => setUserLastName(e.target.value)}/>
-                <br></br>
-                <br></br>
-                <Button variant="contained" endIcon={<SendIcon />} onClick={addNewChat}>Send</Button>
-                <Button variant="contained" color='error' onClick={e => setOpen('none')}>Cancel</Button>
-              </div>
             </span>
-            {usersNameArray.map((el, i) => <User userNames={usersNameArray[i]}></User>)}
+            <br></br>
+            <br></br>
+            {console.log(JSON.parse(localStorage.getItem(`user${0}`))?.userName, state)}
+            {[...Array(localStorage.length).keys()].map(el => state !== JSON.parse(localStorage.getItem(`user${el}`)).userName ? <User userNames={JSON.parse(localStorage.getItem(`user${el}`)).userName}></User> : <></> )}
           </div>
         </Grid>
         <Grid xs={10}>
           <div id="secondPart">
             <div className='sectionForChating'>
-              {localStorage.getItem('message')?.split(',')?.map(el => <p>{el}</p>)}
             </div>
             <div className='sectionForWriting'>
               <span className='span'><TextField id="standard-basic" label="Write a message..." variant="standard" className='textField' onChange={e => setInputText(e.target.value)} value={inputText} /></span>

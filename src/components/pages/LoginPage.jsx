@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { TextField, Button } from '@mui/material';
-import { useNavigate  } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import '../../Assets/signInUpPages.sass'
 
 const LoginPage = () => {
@@ -13,11 +13,11 @@ const LoginPage = () => {
     setPassword('')
   }
 
-  const submit = () => { 
+  const submit = () => {
     for (let i = 0; i < [...Array(localStorage.length).keys()].length; i++) {
       const usersArray = JSON.parse(localStorage.getItem(`user${i}`))
       if (usersArray.userName === userName && usersArray.password === password) {
-        return navigate('/')
+        return navigate('/MainPage', {state: userName})
       }
     }
   }

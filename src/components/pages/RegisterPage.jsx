@@ -8,7 +8,7 @@ const RegisterPage = () => {
   const [userLastName, setUserLastName] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [id, setId] = useState(localStorage.length !== 0 ? localStorage.length - 1 : 0);
+  const [id, setId] = useState(localStorage.length);
   const [tosterWindow, setTosterWindow] = useState(false)
   const navigate = useNavigate();
 
@@ -32,8 +32,16 @@ const RegisterPage = () => {
         setUserLastName('');
         setUserEmail('');
         setPassword('');
-        navigate('/');
-      } else {
+        navigate('/', {state: userName});
+      } else if  (localStorage.length === 0) {
+        localStorage.setItem(`user${id}`, JSON.stringify({ id, userName, userLastName, userEmail, password }));
+        setId(id + 1);
+        setUserName('');
+        setUserLastName('');
+        setUserEmail('');
+        setPassword('');
+        navigate('/', {state: userName});
+      } else  {
         setTosterWindow(true);
         setTimeout(() => setTosterWindow(false), 5000);
       }
