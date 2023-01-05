@@ -12,8 +12,7 @@ import '../../Assets/style.sass'
 const MainPage = () => {
   const [message] = useState(localStorage.getItem('message')?.split(',') ?? []);
   const [inputText, setInputText] = useState('');
-  const { state } = useLocation();
-  console.log(useLocation())
+  const {state} = useLocation();
   const [id] = useState(0);
 
   const sendMessage = e => {
@@ -23,7 +22,14 @@ const MainPage = () => {
     setInputText('');
   }
 
-  // localStorage.clear()
+  const checkNameUnique = el => {
+    if (state !== JSON.parse(localStorage.getItem(`user${el}`)).userName) {
+      return <User userNames={JSON.parse(localStorage.getItem(`user${el}`)).userName}></User>
+    } else {
+      return <></>
+    }
+  }
+
   return (
     <>
       <Grid container spacing={2}>
@@ -35,8 +41,7 @@ const MainPage = () => {
             </span>
             <br></br>
             <br></br>
-            {console.log(JSON.parse(localStorage.getItem(`user${0}`))?.userName, state)}
-            {[...Array(localStorage.length).keys()].map(el => state !== JSON.parse(localStorage.getItem(`user${el}`)).userName ? <User userNames={JSON.parse(localStorage.getItem(`user${el}`)).userName}></User> : <></> )}
+            {[...Array(localStorage.length).keys()].map(el =>  checkNameUnique(el))}
           </div>
         </Grid>
         <Grid xs={10}>

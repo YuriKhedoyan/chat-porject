@@ -7,7 +7,6 @@ const Users = (props) => {
   return (
     <>
       <div>
-        {console.log(props.userNames)}
         <span className='span'><Avatar>{props.userNames}</Avatar></span>
         <span className='span'><h4>{props.userNames}</h4></span>
       </div>
