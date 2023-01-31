@@ -36,7 +36,7 @@ const RegisterPage = () => {
   }
 
   const addNewUser = () => {
-    localStorage.setItem(`user${id}`, JSON.stringify({ id, userName, userLastName, userEmail, password }));
+    localStorage.setItem(`user${id}`, JSON.stringify({ id, userName, userLastName, userEmail, password, chat: {} }));
     setId(id + 1);
     setUserName('');
     setUserLastName('');
@@ -51,13 +51,13 @@ return (
       <Snackbar open={tosterWindow} autoHideDuration={6000} key={'left' + 'bottom'} anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}>
         <Alert severity={'error'} sx={{ width: '100%', bgcolor: 'black', color: 'white' }}> This name or email is busy, please try an other one ! </Alert>
       </Snackbar>
-      <TextField className="standard-basic" label="Write User name" variant="standard" value={userName} onChange={e => setUserName(e.target.value)} />
+      <TextField className="standard-basic" label="First Name" variant="standard" value={userName} onChange={e => setUserName(e.target.value)} />
       <p className="space"></p>
-      <TextField className="standard-basic" label="Write User Lastname" variant="standard" value={userLastName} onChange={e => setUserLastName(e.target.value)} />
+      <TextField className="standard-basic" label="Last Name" variant="standard" value={userLastName} onChange={e => setUserLastName(e.target.value)} />
       <p className="space"></p>
-      <TextField className="standard-basic" label="Write your Email" variant="standard" value={userEmail} onChange={e => setUserEmail(e.target.value)} />
+      <TextField className="standard-basic" label="Email" variant="standard" value={userEmail} onChange={e => setUserEmail(e.target.value)} />
       <p className="space"></p>
-      <TextField className="standard-basic" label="Write your password" variant="standard" type='password' value={password} onChange={e => setPassword(e.target.value)} />
+      <TextField className="standard-basic" label="Password" variant="standard" type='password' value={password} onChange={e => setPassword(e.target.value)} />
       <p className="space"></p>
       <Button variant="contained" color="success" onClick={submit}> Submit </Button>
       <Button variant="contained" color="error" onClick={cancel}> Cancel </Button>

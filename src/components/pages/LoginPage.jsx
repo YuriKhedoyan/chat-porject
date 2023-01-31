@@ -37,9 +37,9 @@ const LoginPage = () => {
         <Snackbar open={tosterWindow} autoHideDuration={6000} onClose={tosterWindow} key={'left' + 'bottom'} anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}>
           <Alert severity={'error'} sx={{ width: '100%', bgcolor: 'black', color: 'white' }}> User name or password is wrong ! </Alert>
         </Snackbar>
-        <TextField id="standard-basic" label="Write User name" variant="standard" value={userName} onChange={e => setUserName(e.target.value)} />
+        <TextField id="standard-basic" label="User name" variant="standard" value={userName} onChange={e => setUserName(e.target.value)} />
         <p className="space"></p>
-        <TextField id="standard-basic" label="Write Password" type='password' variant="standard" value={password} onChange={e => setPassword(e.target.value)} />
+        <TextField id="standard-basic" label="Password" type='password' variant="standard" value={password} onChange={e => setPassword(e.target.value)} />
         <p className="space"></p>
         <Button variant="contained" color="success" onClick={submit}> Submit </Button>
         <Button variant="contained" color="error" onClick={cancel}> Cancel </Button>
